@@ -1,0 +1,1 @@
+Essa pasta contém a estrutura do projeto no Karate
