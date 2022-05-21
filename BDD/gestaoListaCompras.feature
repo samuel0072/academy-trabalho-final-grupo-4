@@ -40,3 +40,18 @@ Feature: Gestão de Lista de Compras
             | Arroz  | 800        | 900             |
             | Arroz  | 100        | 1000            | 
             | Arroz  | 1          | 1000            |
+
+    Scenario Outline: Adiciona quantidade inválidas de itens
+        And acessei a lista de compras
+        When informo os dados do item
+        | nome | <nome> |
+        | quantidade | <quantidade> |
+        And o adiciono na lista
+        Then a lista não é atualizada com o item
+
+        Examples:
+        | nome   | quantidade |
+        | Arroz  | 0          |
+        | Batata | -1         |
+        | Café   | 1001       |
+        | Leite  | 99,99      | 
