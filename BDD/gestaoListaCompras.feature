@@ -23,3 +23,20 @@ Feature: Gestão de Lista de Compras
         | Pacote de leite | 2          |
         | Café            | 6          |
         | Óleo            | 1          |
+
+    Scenario Outline: Adicionar o mesmo item de novo
+        And acessei a lista de compras
+        When informo os dados do item
+        | nome | <nome> |
+        | quantidade | <quantidade> |
+        And o adiciono na lista
+        Then a lista possui aquele item com aquele <nome> e <quantAtualizada>
+
+        Examples:
+            | nome   | quantidade | quantAtualizada |
+            | Batata | 1          | 1               |
+            | Batata | 1          | 2               |
+            | Arroz  | 100        | 100             |
+            | Arroz  | 800        | 900             |
+            | Arroz  | 100        | 1000            | 
+            | Arroz  | 1          | 1000            |
