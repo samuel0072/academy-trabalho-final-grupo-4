@@ -55,3 +55,9 @@ Feature: Gestão de Lista de Compras
         | Batata | -1         |
         | Café   | 1001       |
         | Leite  | 99,99      | 
+
+    Scenario: Adicionar item sem nome
+        And acessei a lista de compras
+        When preencho somente a quantidade de um item
+        And o adiciono na lista
+        Then a lista não é atualizada com o item
