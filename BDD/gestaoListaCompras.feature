@@ -61,3 +61,19 @@ Feature: Gestão de Lista de Compras
         When preencho somente a quantidade de um item
         And o adiciono na lista
         Then a lista não é atualizada com o item
+
+    Scenario Outline: Salvar a lista de compras
+        And acessei a lista de compras
+        And cadastrei alguns itens
+        When informo a descrição
+        | descricao | <descricao> |
+        And salvo a lista
+        Then vejo a lista com os itens que preenchi
+        And vejo a <descricao> que informei
+        And uma opcao para finalizar a lista
+
+        Examples:
+        | descricao |
+        | Teste     |
+        | a |
+        | |
