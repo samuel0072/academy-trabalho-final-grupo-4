@@ -62,6 +62,12 @@ Feature: Gestão de Lista de Compras
         And o adiciono na lista
         Then a lista não é atualizada com o item
 
+    Scenario: Remover item da lista
+        And acessei a lista de compras
+        And cadastrei alguns itens
+        When excluo cada item
+        Then os itens são removidos da lista
+
     Scenario Outline: Salvar a lista de compras
         And acessei a lista de compras
         And cadastrei alguns itens
