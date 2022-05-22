@@ -93,3 +93,20 @@ Feature: Gestão de Lista de Compras
         And salvei uma lista
         When marco um item como concluído
         Then o item aparece como concluído
+
+    Scenario: Adicionar item na lista salva
+        And salvei uma lista
+        When informo os dados do item 
+        | nome       | <nome>       |
+        | quantidade | <quantidade> |
+        And o adiciono na lista
+        Then a lista possui aquele item com aquele <nome> e <quantidade>
+
+        Examples:
+        | nome            | quantidade |
+        | Queijo          | 100        |
+        #quantidade máxima
+        | Batata          | 1000       | 
+        | Pacote de leite | 2          |
+        | Café            | 6          |
+        | Óleo            | 1          |
