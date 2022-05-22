@@ -89,3 +89,7 @@ Feature: Gestão de Lista de Compras
         When salvo a lista
         Then sou informado que a lista não foi salva
 
+    Scenario: Marcar item como concluído
+        And salvei uma lista
+        When marco um item como concluído
+        Then o item aparece como concluído
