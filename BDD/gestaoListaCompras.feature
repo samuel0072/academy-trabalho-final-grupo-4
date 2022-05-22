@@ -110,3 +110,8 @@ Feature: Gestão de Lista de Compras
         | Pacote de leite | 2          |
         | Café            | 6          |
         | Óleo            | 1          |
+
+    Scenario: Finalizar lista de compras
+        And salvei uma lista
+        When finalizo a lista de compras
+        Then a lista vai para o histórico
