@@ -77,3 +77,9 @@ Feature: Gestão de Lista de Compras
         | Teste     |
         | a |
         | |
+
+    Scenario: Salvar lista sem itens
+        And acessei a lista de compras
+        When salvo a lista
+        Then sou informado que a lista não foi salva
+
