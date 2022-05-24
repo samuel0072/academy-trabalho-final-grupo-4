@@ -25,10 +25,10 @@ Scenario: Registro de usuário no sistema sem confirmar senha.
 
 Scenario: Não deve ser possível realizar um cadastro com formato inválido de e-mail.
     Given acessei a tela de registro
-    When informei os dados do usuario com um e-mail em um formato invalido
+    When informo os dados do usuario com nome, e-mail, senha.
     | email | grilla@luds!.com.br |
     | nome  | Grilla              |
-    Then visualizei uma mensagem de erro no campo de "e-mail": 'Formato de e-mail inválido.'
+    Then visualizo uma mensagem de erro no campo de "e-mail": 'Formato de e-mail inválido.'
 
 Scenario: Não deve ser possível cadastrar um usuário com e-mail já utilizado no cadastro de outro usuário.
     Given acessei a tela de registro
