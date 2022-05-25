@@ -2,4 +2,8 @@
 
 
 Membros:
-jonhnatta
+Jonhnatta
+Samuel
+Ludmilla
+Elaine
+Vinicius
