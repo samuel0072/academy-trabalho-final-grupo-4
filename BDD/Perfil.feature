@@ -5,14 +5,8 @@ Feature: Perfil de usuario
 
 Background: Acessar a aplicação de perfil
   Given acessei aplicação Lembra compras 
-
-Scenario: Logar no site 
-  When preencher a barra de email e senha
-  | email | perigomann@gmail.com |
-  | senha | 123456789            |
-  And logo na pagina
-  Then visualizo a pagina home da aplicação 
-
+  And realizei login
+  
 Scenario: Atualizar nome e email do perfil
   When acesso a pagina perfil
   And visualizo a barra de nome e email
