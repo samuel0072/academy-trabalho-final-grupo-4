@@ -8,13 +8,12 @@ Background: Realizar Registro
 
 
 Scenario: Registro de um usuário no sistema com sucesso
-    When informo os dados do usuario com nome, email, senha válidos.
+    When informo os dados do usuario com nome, email, senha.
     | nome  | Ludmilla                |
     | email | ludraroacademy@gmail.com|
     | senha | r@ro2                   |
     And confirmo a verificação de senha
     | senha | r@ro2                   |
-    And clico em 'registrar'
     Then visualizo a mensagem 'Usuário criado com sucesso!'.
 
 Scenario: Registro de usuário no sistema sem confirmar senha.
@@ -22,8 +21,7 @@ Scenario: Registro de usuário no sistema sem confirmar senha.
     | nome  | Ludmilla                |
     | email | ludraroacademy@gmail.com|
     | senha | r@ro2                   |
-    And clico em 'registrar'
-    Then visualizo a mensagem no campo de confirmar senha 'Informe sua senha'
+    Then visualizo a mensagem de erro no campo de confirmar senha 'Informe sua senha'
 
 Scenario: Não deve ser possível realizar um cadastro com formato inválido de e-mail.
     When informo os dados do usuario com nome, e-mail, senha.
