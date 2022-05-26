@@ -4,11 +4,7 @@ Feature: Histórico de lista de compras
   Para visualizar minhas últimas compras
 
   Background: Logar no sistema
-    Given visitei o sistema Lembra Compras
-    When digito meu email e senha
-      | email | jonhnatta@lembracompras.com.br |
-      | senha | 123Compra@                     |
-    Then deve ser feito login no sistema
+    Given estou logado no sistema
 
   Scenario: O usuário só deve visualizar as suas próprias listas
     Given acessei a tela de histórico
@@ -29,6 +25,6 @@ Feature: Histórico de lista de compras
   Scenario: Deve ser possível consultar o nome e itens de uma lista após interagir com a lista no Histórico
     Given estou na tela de histórico
     When possuo listas de compras cadastradas
-    And clico em alguma lista
-    Then deve ser exibido o nome da lista selecionada
-    And deve ser exibido os itens da lista selecionada
+    And seleciono uma lista especifica
+    Then deve ser possivel consultar o nome e item de uma lista
+ 
