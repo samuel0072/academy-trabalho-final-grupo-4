@@ -129,5 +129,4 @@ dist
 # TernJS port file
 .tern-port
 
-
 *target/
