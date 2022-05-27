@@ -7,6 +7,18 @@ Feature: Gestão de Lista de Compras
         Given visitei o sistema Lembra Compras
         And fiz login com minha conta
 
+    Scenario Outline: Criar Lista de compras
+        When crio uma nova lista de compras com descrição
+        | descricao | <desc> |
+        Then a lista é adicionada ao sistema com a descrição <desc>
+
+        Examples:
+            | desc             |
+            | Lista de compras |
+            #lista sem descrição abaixo
+            |                  |
+
+
     Scenario Outline: Adicionar um item novo com sucesso à lista
         And acessei a lista de compras
         When informo os dados do item 
