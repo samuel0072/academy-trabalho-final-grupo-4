@@ -17,3 +17,4 @@ Feature: Criar Usuário Aleatório
         Given path "users"
         Given request createdUser
         When method post
+        * def idUser = response.id
