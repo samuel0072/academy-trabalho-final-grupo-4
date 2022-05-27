@@ -13,7 +13,15 @@ Feature: Perfil de usuario
 
     Scenario: Validar se encontra o usuario pelo id
         Given path "users"
-        Given path usuarioAleatorio.idUser
+        And path usuarioAleatorio.idUser
         When method get
         Then status 200
+        And match response contains { email : "#(usuarioAleatorio.email)" }
     
+    Scenario: Atualizar nome e email do perfil
+        * def novoUsuarioAleatorio = call read("../utils/retornarUsuarioAleatorio.feature")
+        Given path "users"
+        Given request { name: "#(novoUsuarioAleatorio.name)" , email: "#(novoUsuarioAleatorio.email)"}
+        Given method put
+        Then status 200
+        And match response.name != usuarioAleatorio.name
