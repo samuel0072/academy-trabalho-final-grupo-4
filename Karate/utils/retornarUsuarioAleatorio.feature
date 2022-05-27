@@ -13,8 +13,3 @@ Feature: Criar Usuário Aleatório
         * def name = randomString("");
         * def password = randomString("");
         * def createdUser = {name: "#(name)", email:"#(email)", password: "#(password)"}
-        Given url baseUrl
-        Given path "users"
-        Given request createdUser
-        When method post
-        * def idUser = response.id
