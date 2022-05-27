@@ -130,3 +130,5 @@ dist
 .tern-port
 
 *target/
+
+.DS_Store
