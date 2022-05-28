@@ -15,6 +15,7 @@ Feature: Gestão de Lista de Compras
         Given url baseUrl
         And header X-JWT-Token = loginUsuario.tokenAuth
     
+    @ignore
     Scenario Outline: Criar Lista de compras | lista: <desc>
         And path "list"
         # cria uma lista sem itens 
@@ -42,8 +43,8 @@ Feature: Gestão de Lista de Compras
             | Lista de compras |
             #lista sem descrição abaixo
             | |
-
     
+    @ignore
     Scenario Outline: Adicionar um item novo com sucesso à lista | item: <nome>
         * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
         And path "list"
@@ -83,3 +84,50 @@ Feature: Gestão de Lista de Compras
             | Pacote de leite | 2          |
             | Café            | 6          |
             | Óleo            | 1          |
+
+    Scenario Outline: Adicionar o mesmo item de novo | item: <nome>
+        * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
+        And path "list"
+        And path "item"
+        * def item = {name:"#(nome)" , amount: <quantidade>}
+        # configura os dados do item no request body
+        And request item
+        When method post 
+
+        # agora adiciono o item novamente
+        # coma nova quantidade
+        * set item.amount = novaQuant
+        Given url baseUrl
+        And header X-JWT-Token = loginUsuario.tokenAuth
+        And path "list"
+        And path "item"
+        And request item
+        When method post 
+        # A api só retorna código de sucesso
+        Then match responseStatus == 201
+
+         # agora obtem a lista e verifica se o item está na lista
+        Given url baseUrl
+        And header X-JWT-Token = loginUsuario.tokenAuth
+        And path "list"
+        When method get 
+
+        #verifica se realmente o item foi atualizado
+        * set item.amount = quantAtualizada
+         #formato da resposta 
+        * set item.id = "#string"
+        * set item.listId = "#string"
+        * set item.createdAt =  "#string"
+        * set item.updatedAt = "#string"
+        And match response.items contains item
+
+        # desativa a lista criada para não atrapalhar o próximo teste
+        * call read("../utils/desativarListaCompras.feature") loginUsuario
+
+        Examples:
+                | nome   | quantidade! | novaQuant! | quantAtualizada! | 
+                | Batata | 1          | 1         | 2               |
+                | Arroz  | 100        | 800       | 900             |
+                | Arroz  | 900        | 100       | 1000            | 
+                #esse teste falha pois a especificação não cita nenhuma mensagem de erro ou de sucesso sobre isso
+                | Arroz  | 1000       | 1         | 1000            |

@@ -38,20 +38,21 @@ Feature: Gestão de Lista de Compras
 
     Scenario Outline: Adicionar o mesmo item de novo
         And acessei a lista de compras
-        When informo os dados do item
+        And adicionei o item na lista
         | nome | <nome> |
         | quantidade | <quantidade> |
+        When informo os dados do item
+        | nome | <nome> |
+        | quantidade | <novaQuant> |
         And o adiciono na lista
         Then a lista possui aquele item com aquele <nome> e <quantAtualizada>
 
         Examples:
-            | nome   | quantidade | quantAtualizada |
-            | Batata | 1          | 1               |
-            | Batata | 1          | 2               |
-            | Arroz  | 100        | 100             |
-            | Arroz  | 800        | 900             |
-            | Arroz  | 100        | 1000            | 
-            | Arroz  | 1          | 1000            |
+            | nome   | quantidade | novaQuant | quantAtualizada | 
+            | Batata | 1          | 1         | 2               |
+            | Arroz  | 100        | 800       | 900             |
+            | Arroz  | 900        | 100       | 1000            | 
+            | Arroz  | 1000       | 1         | 1000            |
 
     Scenario Outline: Adiciona quantidade inválidas de itens
         And acessei a lista de compras
