@@ -8,24 +8,42 @@ Feature: Gestão de Lista de Compras
 
         * def usuarioAleatorio = call read("../utils/criarUsuarioAleatorio.feature")
         * def loginUsuario = call read("../utils/loginUsuarioAleatorio.feature") usuarioAleatorio
+
+        * def listaFormato = { description: "##string", items: "#array"}
+        * def itemFormato = {id: "#string", listId: "#string", name: "#string", amount: "#number", createdAt: "#string", updatedAt: "#string"}
+
         Given url baseUrl
         And header X-JWT-Token = loginUsuario.tokenAuth
-
-    Scenario Outline: Criar Lista de compras
+    
+    Scenario Outline: Criar Lista de compras | lista: <desc>
         And path "list"
         # cria uma lista sem itens 
         # por que a inserção de itens vai ser testada depois
-        And request { description : desc, items: [] }
+        And request { description : "#(desc)", items: [] }
         When method post
         # valida se foi criada
         Then match responseStatus == 201
+
+        #agora válida se a lista é retornada corretamente pela API
+        Given url baseUrl
+        And header X-JWT-Token = loginUsuario.tokenAuth
+        And path "list"
+        When method get 
+        #verifica o formato da lista
+        Then match responseStatus == 200
+        And match response == listaFormato
+        And match response.description == desc
+
+        # desativa a lista criada para não atrapalhar os próximos teste
+        * call read("../utils/desativarListaCompras.feature") loginUsuario
 
         Examples:
             | desc             |
             | Lista de compras |
             #lista sem descrição abaixo
-            |                  |
+            | |
 
+    
     Scenario Outline: Adicionar um item novo com sucesso à lista | item: <nome>
         * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
         And path "list"
