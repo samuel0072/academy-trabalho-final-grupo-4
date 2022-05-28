@@ -166,3 +166,22 @@ Feature: Gestão de Lista de Compras
         | Leite    | 99.99      | 
         | Maracujá | aaaa       |
         | Leite    | true       |
+
+    Scenario: Finalizar lista de compras
+        * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
+        And path "list"
+        And method patch
+        Then match responseStatus == 204
+
+        #verifico se a lista aparece no histórico como inativa
+        * def lista = listaCriada.lista
+
+        * def historico = {id: "#string", userId: "#(usuarioAleatorio.idUser)",  description: "#(lista.description)", active: false, createdAt: "#string", updatedAt: "#string"}
+        Given url baseUrl
+        And header X-JWT-Token = loginUsuario.tokenAuth
+        And path "list"
+        And path "history"
+        When method get
+        Then match responseStatus == 200
+        And match response contains historico
+        
