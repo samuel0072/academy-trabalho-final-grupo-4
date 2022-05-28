@@ -4,7 +4,7 @@ Feature: Gestão de Lista de Compras
     Para registrar os produtos que desejo comprar.
 
     Background: Entrar no sistema
-        #cria o usuário e faz login com o mesmo
+        # cria o usuário e faz login com o mesmo
 
         * def usuarioAleatorio = call read("../utils/criarUsuarioAleatorio.feature")
         * def loginUsuario = call read("../utils/loginUsuarioAleatorio.feature") usuarioAleatorio
@@ -25,3 +25,45 @@ Feature: Gestão de Lista de Compras
             | Lista de compras |
             #lista sem descrição abaixo
             |                  |
+
+    Scenario Outline: Adicionar um item novo com sucesso à lista | item: <nome>
+        * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
+        And path "list"
+        And path "item"
+
+        * def item = {name:"#(nome)" , amount: <quantidade>}
+        # configura os dados do item no request body
+        And request item
+        When method post 
+        # A api só retorna código de sucesso
+        Then match responseStatus == 201
+
+        # agora obtem a lista e verifica se o item está na lista
+        Given url baseUrl
+        And header X-JWT-Token = loginUsuario.tokenAuth
+        And path "list"
+        When method get 
+
+        #formato da resposta 
+        * def responseFormat = { description: "#string", items: "#array"}
+        * def itemsFormat = {id: "#string", listId: "#string", name: "#string", amount: "#number", createdAt: "#string", updatedAt: "#string"}
+        * set item.id = "#string"
+        * set item.listId = "#string"
+        * set item.createdAt =  "#string"
+        * set item.updatedAt = "#string"
+
+        Then match response == responseFormat
+        And match each response.items == itemsFormat
+        And match response.items contains item
+
+        # desativa a lista criada para não atrapalhar o próximo teste
+        * call read("../utils/desativarListaCompras.feature") loginUsuario
+
+        Examples:
+            | nome            | quantidade |
+            | Queijo          | 100        |
+            #quantidade máxima
+            | Batata          | 1000       |
+            | Pacote de leite | 2          |
+            | Café            | 6          |
+            | Óleo            | 1          |
