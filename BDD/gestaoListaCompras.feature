@@ -62,11 +62,12 @@ Feature: Gestão de Lista de Compras
         Then a lista não é atualizada com o item
 
         Examples:
-        | nome   | quantidade |
-        | Arroz  | 0          |
-        | Batata | -1         |
-        | Café   | 1001       |
-        | Leite  | 99,99      | 
+        | nome     | quantidade |
+        | Arroz    | 0          |
+        | Batata   | -1         |
+        | Café     | 1001       |
+        | Leite    | 99,99      | 
+        | Maracujá | aaaa       |
 
     Scenario: Adicionar item sem nome
         And acessei a lista de compras
