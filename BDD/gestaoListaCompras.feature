@@ -7,7 +7,7 @@ Feature: Gestão de Lista de Compras
         Given visitei o sistema Lembra Compras
         And fiz login com minha conta
 
-    Scenario Outline: Criar Lista de compras
+    Scenario Outline: Criar Lista de compras sem itens
         When crio uma nova lista de compras com descrição
         | descricao | <desc> |
         Then a lista é adicionada ao sistema com a descrição <desc>
@@ -17,6 +17,18 @@ Feature: Gestão de Lista de Compras
             | Lista de compras |
             #lista sem descrição abaixo
             |                  |
+    
+    Scenario Outline: Criar Lista de compras com itens
+        When crio uma nova lista de compras com descrição e alguns itens
+        | quantidade de itens | <quantItens> |
+        | descricao           | <desc>       |
+        Then a lista é adicionada com sucesso ao sistema
+
+        Examples:
+           | quantItens | desc  |
+           | 1          | Lista |
+           | 100        |       | 
+           | 50         |  kajs |
 
 
     Scenario Outline: Adicionar um item novo com sucesso à lista
@@ -76,48 +88,11 @@ Feature: Gestão de Lista de Compras
         And o adiciono na lista
         Then a lista não é atualizada com o item
 
-    Scenario Outline: Salvar a lista de compras
-        And acessei a lista de compras
-        And cadastrei alguns itens
-        When informo a descrição
-        | descricao | <descricao> |
-        And salvo a lista
-        Then vejo a lista com os itens que preenchi
-        And vejo a <descricao> que informei
-        And posso finalizar a lista
-
-        Examples:
-        | descricao |
-        | Teste     |
-        | a |
-        | |
-
-    Scenario: Salvar lista sem itens
-        And acessei a lista de compras
-        When salvo a lista
-        Then sou informado que a lista não foi salva
 
     Scenario: Marcar item como concluído
         And salvei uma lista
         When concluo um item 
         Then o item aparece como concluído
-
-    Scenario: Adicionar item na lista salva
-        And salvei uma lista
-        When informo os dados do item 
-        | nome       | <nome>       |
-        | quantidade | <quantidade> |
-        And o adiciono na lista
-        Then a lista possui aquele item com aquele <nome> e <quantidade>
-
-        Examples:
-        | nome            | quantidade |
-        | Queijo          | 100        |
-        #quantidade máxima
-        | Batata          | 1000       | 
-        | Pacote de leite | 2          |
-        | Café            | 6          |
-        | Óleo            | 1          |
 
     Scenario: Finalizar lista de compras
         And salvei uma lista
