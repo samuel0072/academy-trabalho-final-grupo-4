@@ -15,7 +15,7 @@ Feature: Gestão de Lista de Compras
         Given url baseUrl
         And header X-JWT-Token = loginUsuario.tokenAuth
     
-    @ignore
+    
     Scenario Outline: Criar Lista de compras | lista: <desc>
         And path "list"
         # cria uma lista sem itens 
@@ -44,7 +44,7 @@ Feature: Gestão de Lista de Compras
             #lista sem descrição abaixo
             | |
     
-    @ignore
+    
     Scenario Outline: Adicionar um item novo com sucesso à lista | item: <nome>
         * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
         And path "list"
@@ -131,3 +131,14 @@ Feature: Gestão de Lista de Compras
                 | Arroz  | 900        | 100       | 1000            | 
                 #esse teste falha pois a especificação não cita nenhuma mensagem de erro ou de sucesso sobre isso
                 | Arroz  | 1000       | 1         | 1000            |
+
+    Scenario: Adicionar item sem nome
+        * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
+        * def item = {name:"" , amount: 1}
+        # configura os dados do item no request body
+        And path "list"
+        And path "item"
+        And request item
+        When method post 
+        Then match responseStatus == 400
+        Then match response == {"error" : "Bad request."}
