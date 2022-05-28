@@ -63,15 +63,13 @@ Feature: Gestão de Lista de Compras
         When method get 
 
         #formato da resposta 
-        * def responseFormat = { description: "#string", items: "#array"}
-        * def itemsFormat = {id: "#string", listId: "#string", name: "#string", amount: "#number", createdAt: "#string", updatedAt: "#string"}
         * set item.id = "#string"
         * set item.listId = "#string"
         * set item.createdAt =  "#string"
         * set item.updatedAt = "#string"
 
-        Then match response == responseFormat
-        And match each response.items == itemsFormat
+        Then match response == listaFormato
+        And match each response.items == itemFormato
         And match response.items contains item
 
         # desativa a lista criada para não atrapalhar o próximo teste
