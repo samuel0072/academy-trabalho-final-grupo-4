@@ -142,3 +142,27 @@ Feature: Gestão de Lista de Compras
         When method post 
         Then match responseStatus == 400
         Then match response == {"error" : "Bad request."}
+
+    Scenario Outline: Adiciona quantidade inválidas de itens | quantidade: <quantidade>
+        * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
+        * def item = {name:"#(nome)" , amount: <quantidade>}
+        
+        And path "list"
+        And path "item"
+        And request item
+        When method post 
+
+        Then match responseStatus == 400
+        Then match response == {error : "Bad request."}
+
+        # desativa a lista criada para não atrapalhar o próximo teste
+        * call read("../utils/desativarListaCompras.feature") loginUsuario
+
+        Examples:
+        | nome     | quantidade! | 
+        | Arroz    | 0          | 
+        | Batata   | -1         | 
+        | Café     | 1001       | 
+        | Leite    | 99.99      | 
+        | Maracujá | aaaa       |
+        | Leite    | true       |
