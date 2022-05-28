@@ -7,6 +7,18 @@ Feature: Gestão de Lista de Compras
         Given visitei o sistema Lembra Compras
         And fiz login com minha conta
 
+    Scenario Outline: Criar Lista de compras
+        When crio uma nova lista de compras com descrição
+        | descricao | <desc> |
+        Then a lista é adicionada ao sistema com a descrição <desc>
+
+        Examples:
+            | desc             |
+            | Lista de compras |
+            #lista sem descrição abaixo
+            |                  |
+
+
     Scenario Outline: Adicionar um item novo com sucesso à lista
         And acessei a lista de compras
         When informo os dados do item 
@@ -58,7 +70,7 @@ Feature: Gestão de Lista de Compras
 
     Scenario: Adicionar item sem nome
         And acessei a lista de compras
-        When preencho somente a quantidade de um item
+        When informo somente a quantidade de um item
         And o adiciono na lista
         Then a lista não é atualizada com o item
 
@@ -76,7 +88,7 @@ Feature: Gestão de Lista de Compras
         And salvo a lista
         Then vejo a lista com os itens que preenchi
         And vejo a <descricao> que informei
-        And uma opcao para finalizar a lista
+        And posso finalizar a lista
 
         Examples:
         | descricao |
@@ -91,7 +103,7 @@ Feature: Gestão de Lista de Compras
 
     Scenario: Marcar item como concluído
         And salvei uma lista
-        When marco um item como concluído
+        When concluo um item 
         Then o item aparece como concluído
 
     Scenario: Adicionar item na lista salva
