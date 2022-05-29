@@ -10,7 +10,7 @@ Feature: Criar Usuário
         * def name = java.util.UUID.randomUUID() + ""
         * def email = java.util.UUID.randomUUID() + "@email.com"
         * def password = java.util.UUID.randomUUID() + ""
-        * def user = read("../utils/criarUsuario.json")
+        * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
         And path "/users"
@@ -23,7 +23,7 @@ Feature: Criar Usuário
         * def name = java.util.UUID.randomUUID() + ""
         * def email = java.util.UUID.randomUUID() + "@email.com"
         * def password = ""
-        * def user = read("../utils/criarUsuario.json")
+        * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
         And path "/users"
@@ -35,7 +35,7 @@ Feature: Criar Usuário
         * def name = java.util.UUID.randomUUID() + ""
         * def email = java.util.UUID.randomUUID() + "@email.com"
         * def password = "minhasenha123minhasenha123minhasenha123"
-        * def user = read("../utils/criarUsuario.json")
+        * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
         And path "/users"
@@ -47,7 +47,7 @@ Feature: Criar Usuário
         * def name = java.util.UUID.randomUUID() + ""
         * def email = java.util.UUID.randomUUID() + ".email.com"
         * def password = java.util.UUID.randomUUID() + ""
-        * def user = read("../utils/criarUsuario.json")
+        * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
         And path "/users"
@@ -59,7 +59,7 @@ Feature: Criar Usuário
         * def name = java.util.UUID.randomUUID() + ""
         * def email = java.util.UUID.randomUUID() + "@email.com"
         * def password = java.util.UUID.randomUUID() + ""
-        * def user = read("../utils/criarUsuario.json")
+        * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "#(user.password)"}
         * def createUser2 = { name: "#(user.name)", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
@@ -76,7 +76,7 @@ Feature: Criar Usuário
         * def name = "Nome Gigantesco Nome Gigantesco Nome Gigantesco Nome Gigantesco Nome Gigantesco Nome Gigantesco Nome Gigantesco"
         * def email = java.util.UUID.randomUUID() + "@email.com"
         * def password = java.util.UUID.randomUUID() + ""
-        * def user = read("../utils/criarUsuario.json")
+        * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
         And path "/users"
@@ -88,7 +88,7 @@ Feature: Criar Usuário
         * def name = java.util.UUID.randomUUID() + ""
         * def email = java.util.UUID.randomUUID() + "@email.commmmmmmmmmmmmmmmmmmmmmmmmm"
         * def password = java.util.UUID.randomUUID() + ""
-        * def user = read("../utils/criarUsuario.json")
+        * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
         And path "/users"
