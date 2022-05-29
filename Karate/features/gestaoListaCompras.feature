@@ -5,16 +5,15 @@ Feature: Gestão de Lista de Compras
 
     Background: Entrar no sistema
         # cria o usuário e faz login com o mesmo
-
         * def usuarioAleatorio = call read("../utils/criarUsuarioAleatorio.feature")
         * def loginUsuario = call read("../utils/loginUsuarioAleatorio.feature") usuarioAleatorio
 
+        #formatos padrões retornados pela API
         * def listaFormato = { description: "##string", items: "#array"}
         * def itemFormato = {id: "#string", listId: "#string", name: "#string", amount: "#number", createdAt: "#string", updatedAt: "#string"}
 
         Given url baseUrl
         And header X-JWT-Token = loginUsuario.tokenAuth
-    
     
     Scenario Outline: Criar Lista de compras | lista: <desc>
         And path "list"
@@ -73,8 +72,7 @@ Feature: Gestão de Lista de Compras
            | 1          | Lista |
            | 100        |       | 
            | 50         |  kajs |
-           | 1000        |  kajs |
-           
+           | 1000        |  kajs |      
     
     Scenario Outline: Adicionar um item novo com sucesso à lista | item: <nome>
         * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
@@ -95,6 +93,8 @@ Feature: Gestão de Lista de Compras
         When method get 
 
         #formato da resposta 
+        #como os campos abaixo são imprevisíveis
+        #eu só testo o formato deles e se estão presentes
         * set item.id = "#string"
         * set item.listId = "#string"
         * set item.createdAt =  "#string"
@@ -115,7 +115,7 @@ Feature: Gestão de Lista de Compras
             | Pacote de leite | 2          |
             | Café            | 6          |
             | Óleo            | 1          |
-
+    
     Scenario Outline: Adicionar o mesmo item de novo | item: <nome>
         * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
         And path "list"
@@ -162,7 +162,7 @@ Feature: Gestão de Lista de Compras
                 | Arroz  | 900        | 100       | 1000            | 
                 #esse teste falha pois a especificação não cita nenhuma mensagem de erro ou de sucesso sobre isso
                 | Arroz  | 1000       | 1         | 1000            |
-
+    
     Scenario: Adicionar item sem nome
         * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
         * def item = {name:"" , amount: 1}
@@ -197,7 +197,7 @@ Feature: Gestão de Lista de Compras
         | Leite    | 99.99      | 
         | Maracujá | aaaa       |
         | Leite    | true       |
-
+    
     Scenario: Finalizar lista de compras
         * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
         And path "list"
