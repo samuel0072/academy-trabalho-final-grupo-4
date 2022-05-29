@@ -1,47 +1,40 @@
 Feature: login
 
-Como um usuário com conta no sistema
-Desejo realizar meu acesso na aplicação
-Para conseguir utilizar os serviços do Lembra Compras.
+    Como um usuário com conta no sistema
+    Desejo realizar meu acesso na aplicação
+    Para conseguir utilizar os serviços do Lembra Compras.
 
+    Background: Acessar o sistema
+        Given acessei o sistema
 
-Scenario: Realizando login no Sistema Lembra Compras com dados cadastrados
+        Scenario: Realizando login no Sistema Lembra Compras com dados cadastrados
+            When informo minhas credenciais de usuário para login
+            And faço o login
+            Then ocorre a autenticação com sucesso
+            And tenho acesso ao sistema
 
-        Dado que acessei o sistema na tela de login
-        Quando informo minhas credenciais de usuário
-        E clico em “Entrar”
-        Então ocorre a autenticação para meu acesso a página inicial
-        E tenho acesso ao menu de opções do sistema
+        Scenario: Realizando login no Sistema Lembra Compras com dados incorretos ou inexistentes
+            When informo e-mail não cadastrado
+            And faço login
+            Then o login é recusado
+            And uma mensagem de erro sobre o email é retornada pelo sistema
 
-Scenario: Realizando login no Sistema Lembra Compras com dados incorretos ou inexistentes
+        Scenario: Realizando login no Sistema Lembra Compras com formato inválido
+            When informo e-mail com formato inválido
+            And faço login
+            Então o login é recusado
+            And uma mensagem de erro sobre o formato do email é retornada pelo sistema
 
-        Dado que acessei o sistema na tela de login
-        Quando informo e-mail não cadastrado
-        E clico em “Entrar”
-        Então meu acesso a página é recusado
-        E a seguinte mensagem é exibida: “E-mail ou senhas incorretas.”
+        Scenario: Realizando login apenas com email
+            When informo apenas o e-mail cadastrado
+            And faço login
+            Então o login é recusado
+            And o sistema me pede para informar a senha
 
-Scenario: Realizando login no Sistema Lembra Compras com dados incorretos ou inexistentes
+        Scenario: Realizando login apenas senha 
+            When informo apenas a senha cadastrada
+            And faço login
+            Então o login é recusado
+            And o sistema me pede para informar o email
 
-        Dado que acessei o sistema na tela de loginsz
-        Quando informo e-mail com formato inválido
-        E clico em “Entrar”
-        Então meu acesso a página é recusado
-        E a seguinte mensagem é exibida: “Formato de e-mail inválido.”
-
-Scenario: Realizando login no Sistema Lembra Compras com dados incorretos ou inexistentes
-
-        Dado que acessei o sistema na tela de login
-        Quando informo apenas o e-mail cadastrado
-        E clico em “Entrar”
-        Então meu acesso a página é recusado
-        E a seguinte mensagem é exibida: “Informe sua senha”
-
-Scenario: Realizando login no Sistema Lembra Compras com dados incorretos ou inexistentes
-
-        Dado que acessei o sistema na tela de login
-        Quando informo apenas a senha cadastrada
-        E clico em “Entrar”
-        Então meu acesso a página é recusado
-        E a seguinte mensagem é exibida: “Informe seu e-mail”
 

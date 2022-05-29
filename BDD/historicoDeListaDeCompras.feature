@@ -1,10 +1,10 @@
 Feature: Histórico de lista de compras
-  Como um usuário com conta no sistema
-  Desejo consultar minhas últimas listas de compra
-  Para visualizar minhas últimas compras
+    Como um usuário com conta no sistema
+    Desejo consultar minhas últimas listas de compra
+    Para visualizar minhas últimas compras
 
-  Background: Logar no sistema
-    Given estou logado no sistema
+    Background: Logar no sistema
+        Given estou logado no sistema
 
   Scenario: O usuário só deve visualizar as suas próprias listas
     Given dado que consultei o histórico
