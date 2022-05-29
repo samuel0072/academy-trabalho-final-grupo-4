@@ -216,3 +216,15 @@ Feature: Gestão de Lista de Compras
         Then match responseStatus == 200
         And match response contains historico
         
+        #agora testo se consigo adicionar itens
+        # devo não conseguir pois a lista está vazia
+        * def item = {name:"item de teste" , amount: 5}
+        Given url baseUrl
+        And header X-JWT-Token = loginUsuario.tokenAuth
+        And path "list"
+        And path "item"
+        And request item
+        When method post
+        Then match responseStatus == 422
+        And match response == {error: "There is no active list."}
+        
