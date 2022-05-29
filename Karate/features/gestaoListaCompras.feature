@@ -44,6 +44,37 @@ Feature: Gestão de Lista de Compras
             #lista sem descrição abaixo
             | |
     
+    Scenario Outline: Criar Lista de compras com itens | Quantidade: <quantItens>
+        * def gerarItens = 
+        """
+        function(quantidade) {
+            var itens = [];
+            for(var i = 0; i < quantidade ; i++) {
+                var itemNome = String(java.util.UUID.randomUUID());
+                //quantidade aleatorio entre 1 e 11
+                var itemQuant = Math.floor(Math.random() * 10) + 1;
+                itens.push({
+                    "name" : itemNome,
+                    "amount": itemQuant
+                });
+            }
+            return itens;
+        }
+        """
+        * def itens = gerarItens(<quantItens>); 
+        * def lista = { description : "#(desc)", items: "#(itens)" }
+        And path "list"
+        And request lista
+        When method post
+        Then match responseStatus == 201
+
+        Examples:
+           | quantItens | desc  |
+           | 1          | Lista |
+           | 100        |       | 
+           | 50         |  kajs |
+           | 1000        |  kajs |
+           
     
     Scenario Outline: Adicionar um item novo com sucesso à lista | item: <nome>
         * def listaCriada = call read("../utils/criarListaCompras.feature") loginUsuario
