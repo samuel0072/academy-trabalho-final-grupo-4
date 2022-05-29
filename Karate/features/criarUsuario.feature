@@ -23,7 +23,7 @@ Feature: Criar Usuário
         Then status 400
         And match response == { "error": "Bad request."}
 
-     Scenario: Registro de um usuário no sistema sem nome
+    Scenario: Registro de um usuário no sistema sem nome
         * def user = read("../utils/usuario.json")
         * def createUser = { name: "", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
@@ -31,7 +31,7 @@ Feature: Criar Usuário
         Then status 400
         And match response == { "error": "Bad request."}
 
-     Scenario: Registro de um usuário no sistema sem email
+    Scenario: Registro de um usuário no sistema sem email
         * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "", password: "#(user.password)"}
         And request createUser
@@ -66,11 +66,21 @@ Feature: Criar Usuário
     Scenario: Não deve ser possível cadastrar um nome com mais de 100 caracteres
         * def userName = "Nome Gigantesco Nome Gigantesco Nome Gigantesco Nome Gigantesco Nome Gigantesco Nome Gigantesco Nome Gigantesco"
         * def user = read("../utils/usuario.json")
-        * def createUser = { name: "#(userName)", email: "email.email.com", password: "#(user.password)"}
+        * def createUser = { name: "#(userName)", email: "#(user.email)", password: "#(user.password)"}
         And request createUser
         When method post
         Then status 400
         And match response == { "error": "Bad request."}
+
+    Scenario: Deve ser possível cadastrar nomes de usuários com menos ou até 100 caracteres
+        * def userName = "RaroLabsRaroLabsRaroLabsRaroLabsRaroLabsRaroLabsRaroLabsRaroLabsRaroLabsRaroLabsRaroLabsRaroLabsRaro"
+        * def user = read("../utils/usuario.json")
+        * def createUser = { name: "#(userName)", email: "#(user.email)", password: "#(user.password)"}
+        And request createUser
+        When method post
+        Then status 201
+        * def resp = response
+        And match response == { id: "#(resp.id)", name: "#(resp.name)", email: "#(resp.email)", is_admin: "#(resp.is_admin)" }
 
     Scenario: Não deve ser possível cadastrar um email com mais de 60 caracteres
         * def userEmail = java.util.UUID.randomUUID() + "@email.commmmmmmmmmmmmmmmmmmmmmmmmm"
@@ -81,3 +91,12 @@ Feature: Criar Usuário
         Then status 400
         And match response == { "error": "Bad request."}
 
+    Scenario: Deve ser possível cadastrar emails com menos ou até 60 caracteres
+        * def userEmail = java.util.UUID.randomUUID() + "@email.commmmmmmmmmmmmmm"
+        * def user = read("../utils/usuario.json")
+        * def createUser = { name: "#(user.name)", email: "#(userEmail)", password: "#(user.password)"}
+        And request createUser
+        When method post
+        Then status 201
+        * def resp = response
+        And match response == { id: "#(resp.id)", name: "#(resp.name)", email: "#(resp.email)", is_admin: "#(resp.is_admin)" }
