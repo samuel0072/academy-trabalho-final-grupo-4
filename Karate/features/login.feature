@@ -6,8 +6,7 @@ Para conseguir utilizar os serviços do Lembra Compras.
     Background: Acessar aplicação 
         * def usuarioAleatorio = call read("../utils/criarUsuarioAleatorio.feature")
         Given url baseUrl
-        #* def loginAleatorio = call read("../utils/loginUsuarioAleatorio.feature") usuarioAleatorio 
-
+        
         Scenario: Realizando login no Sistema Lembra Compras com dados cadastrados
             And path "auth", "login"
             And form field email = usuarioAleatorio.createdUser.email
@@ -40,4 +39,5 @@ Para conseguir utilizar os serviços do Lembra Compras.
             And form field password = usuarioAleatorio.createdUser.password
             When method post
             Then status 400
+
 
