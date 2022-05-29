@@ -63,7 +63,7 @@ Feature: Histórico de lista de compras
 
 
     Scenario: Deve ser possível consultar o nome e itens de uma lista após interagir com a lista no Histórico
-
+        
         * def gerarItens =
             """
             function(qtd) {
@@ -81,8 +81,7 @@ Feature: Histórico de lista de compras
             """
         * def qtdItemGerados = 2
         * def itens = gerarItens(qtdItemGerados);
-        * print itens
-        * def lista = { description : "Gerado rondomicamente", items: "#(itens)" }
+        * def lista = { description : "Gerado randomicamente", items: "#(itens)" }
         And path "list"
         And request lista
         When method post
@@ -104,8 +103,7 @@ Feature: Histórico de lista de compras
         When method get
         Then match responseStatus == 200
         And match response.items == '#[qtdItemGerados]'
-        * def asdf = response.items[0].amount
-        * print asdf
+        
         And match response.items[0].name == "item 0"
         And match response.items[0].amount != 0
         And match response.items[1].name == "item 1"
