@@ -114,5 +114,5 @@ Feature: Criar Usuário
         And request createUser
         When method post
         Then status 201
-        * def resp = response
-        And match response == { id: "#(resp.id)", name: "#(resp.name)", email: "#(resp.email)", is_admin: "#(resp.is_admin)" }
+        * def res = response
+        And match response == { id: "#(res.id)", name: "#(res.name)", email: "#(res.email)", is_admin: "#(res.is_admin)" }
