@@ -15,6 +15,14 @@ Feature: Criar Usuário
         * def resp = response
         And match response == { id: "#(resp.id)", name: "#(resp.name)", email: "#(resp.email)", is_admin: "#(resp.is_admin)" }
 
+    Scenario: Registro de um usuário com caracteres especiais no nome
+        * def user = read("../utils/usuario.json")
+        * def createUser = { name: "@%%@#", email: "#(user.email)", password: "#(user.password)"}
+        And request createUser
+        When method post
+        Then status 400
+        And match response == { "error": "Bad request."}
+
     Scenario: Registro de um usuário no sistema sem senha
         * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: ""}
