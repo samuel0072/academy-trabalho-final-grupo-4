@@ -23,6 +23,14 @@ Feature: Criar Usuário
         Then status 400
         And match response == { "error": "Bad request."}
 
+    Scenario: Registro de um usuário com senha de 1 caractere
+        * def user = read("../utils/usuario.json")
+        * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "a"}
+        And request createUser
+        When method post
+        Then status 400
+        And match response == { "error": "Bad request."}
+
     Scenario: Registro de um usuário no sistema sem senha
         * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: ""}
