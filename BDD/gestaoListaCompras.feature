@@ -32,7 +32,7 @@ Feature: Gestão de Lista de Compras
 
 
     Scenario Outline: Adicionar um item novo com sucesso à lista
-        And acessei a lista de compras
+        And acessei a lista de compras ativa
         When informo os dados do item 
         | nome       | <nome>       |
         | quantidade | <quantidade> |
@@ -49,7 +49,7 @@ Feature: Gestão de Lista de Compras
         | Óleo            | 1          |
 
     Scenario Outline: Adicionar o mesmo item de novo
-        And acessei a lista de compras
+        And acessei a lista de compras ativa
         And adicionei o item na lista
         | nome | <nome> |
         | quantidade | <quantidade> |
@@ -67,7 +67,7 @@ Feature: Gestão de Lista de Compras
             | Arroz  | 1000       | 1         | 1000            |
 
     Scenario Outline: Adiciona quantidade inválidas de itens
-        And acessei a lista de compras
+        And acessei a lista de compras ativa
         When informo os dados do item
         | nome | <nome> |
         | quantidade | <quantidade> |
@@ -83,11 +83,10 @@ Feature: Gestão de Lista de Compras
         | Maracujá | aaaa       |
 
     Scenario: Adicionar item sem nome
-        And acessei a lista de compras
+        And acessei a lista de compras ativa
         When informo somente a quantidade de um item
         And o adiciono na lista
         Then a lista não é atualizada com o item
-
 
     Scenario: Marcar item como concluído
         And salvei uma lista
@@ -98,3 +97,4 @@ Feature: Gestão de Lista de Compras
         And salvei uma lista
         When finalizo a lista de compras
         Then a lista vai para o histórico
+        And fica inativa
