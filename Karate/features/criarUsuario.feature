@@ -23,6 +23,22 @@ Feature: Criar Usuário
         Then status 400
         And match response == { "error": "Bad request."}
 
+     Scenario: Registro de um usuário no sistema sem nome
+        * def user = read("../utils/usuario.json")
+        * def createUser = { name: "", email: "#(user.email)", password: "#(user.password)"}
+        And request createUser
+        When method post
+        Then status 400
+        And match response == { "error": "Bad request."}
+
+     Scenario: Registro de um usuário no sistema sem email
+        * def user = read("../utils/usuario.json")
+        * def createUser = { name: "#(user.name)", email: "", password: "#(user.password)"}
+        And request createUser
+        When method post
+        Then status 400
+        And match response == { "error": "Bad request."}
+
     Scenario: Não deve ser possível cadastrar uma senha com mais de 30 caracteres
         * def user = read("../utils/usuario.json")
         * def createUser = { name: "#(user.name)", email: "#(user.email)", password: "minhasenha123minhasenha123minhasenha123"}
