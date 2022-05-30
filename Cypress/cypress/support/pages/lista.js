@@ -4,10 +4,16 @@ class lista {
     qtdItem = ".sc-bZkfAO > :nth-child(2) > .sc-ksZaOG";
     btnAdicionarItem = ".sc-kLLXSd";
     btnSalvar = ".sc-ftvSup";
+    btnConfirmar = '.sc-jdAMXn';
     
     visitar() {
         cy.visit("https://academy-lembra-compras.herokuapp.com/login");
     }
+
+    aguardar(mili){
+        cy.wait(mili);
+    }
+
     informaNomeLista(NomeLista) {
         cy.get(this.inputNomeLista).type(NomeLista);
     }
@@ -23,6 +29,22 @@ class lista {
         cy.contains("button", "Salvar").click();
     }
 
+    clicaFinalizarLista (){
+        cy.contains("button", "Finalizar a lista").click();
+        
+    }
+    clicaEmConfirmar (){
+       // cy.get('.sc-jdAMXn').click({ force: true });
+        cy.get('.sc-jdAMXn > button').click({ force: true });
+        
+    }
+
+    criaVariasListas(QtdLista, qtdItensNaLista){
+        for (var i = 0; i < QtdLista; i++) {
+          
+         }
+
+    }
 
 }
 
