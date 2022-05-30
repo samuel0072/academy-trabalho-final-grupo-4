@@ -14,7 +14,7 @@ When("informei os dados necessarios para criar uma lista", () => {
     criaLista.clicaFinalizarLista();
     criaLista.clicaEmConfirmar();
     cy.wait(500);
-
+    criaLista.criaVariasListas(3,5);
 });
 
 Then("visualizo a confirmacao de lista criada", () => {

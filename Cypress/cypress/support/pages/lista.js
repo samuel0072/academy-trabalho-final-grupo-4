@@ -40,8 +40,30 @@ class lista {
     }
 
     criaVariasListas(QtdLista, qtdItensNaLista){
-        for (var i = 0; i < QtdLista; i++) {
-          
+        
+        for (var x = 0; x < QtdLista; x++) {
+            var NomeLista = "ListaNova - " + (x+1);
+            cy.wait(100);
+            this.informaNomeLista(NomeLista);
+
+                for (var i = 0; i < qtdItensNaLista; i++) {
+                   var NomeItem = "ItemNovo " + (i+1);
+                //    cy.wait(100);
+                    this.informmaNomeItem(NomeItem);
+              //      cy.wait(100);
+                    this.clicaBtnAddItem();
+
+                }
+
+            this.clicarBtnSalvar();
+            //cy.wait(100);
+            this.clicaFinalizarLista();
+            //cy.wait(100);
+            this.clicaEmConfirmar();
+            //cy.wait(100);
+
+
+      
          }
 
     }
