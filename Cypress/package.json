@@ -4,16 +4,19 @@
   "description": "Essa pasta contém os testes realizados no front-end do Lembra  Compras",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "open": "cypress open"
   },
   "keywords": [],
   "author": "Grupo 4 do Raro Academy",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^9.7.0",
-    "cypress-cucumber-preprocessor": "^4.3.1"
+    "cypress": "^9.7.0"
   },
   "cypress-cucumber-preprocessor": {
     "step_definitions": "cypress/support/steps"
+  },
+  "devDependencies": {
+    "cypress-cucumber-preprocessor": "^4.3.1"
   }
 }
