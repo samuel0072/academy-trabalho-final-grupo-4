@@ -1,6 +1,6 @@
 {
     "testFiles": "**/*.feature",
-    "baseUrl": "https://academy-lembra-compras.herokuapp.com/",
+    "baseUrl": "https://academy-lembra-compras.herokuapp.com/login",
     "env" : {
         "TAGS" : "not @ignore",
         "API_URL": "https://lista-compras-api.herokuapp.com/api/v1"
