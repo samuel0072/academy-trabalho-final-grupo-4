@@ -78,3 +78,44 @@ Then("deve ser exibido apenas as 10 listas mais recentes", () => {
         
 
 });
+
+
+
+//Scenario: Deve ser possível consultar o nome e itens de uma lista após interagir com a lista no Histórico
+
+Given("dado que consultei o histórico de lista", () => {
+    realizaLogin.visitar();
+    cy.log("acessei o given correto");
+    cy.wait(500);
+    realizaLogin.preencherEmail("lud3@gmail.com");
+    realizaLogin.informaSenha("123");
+    realizaLogin.clicarBtnEntrar();
+   
+}); 
+
+When("possuo listas de compras cadastradas", () => {
+    historicoLista.acessarPaginaInicialLista();
+    
+    cy.log("chamei");
+    criaLista.criaVariasListas(1,2);
+    
+});
+
+When("seleciono uma lista especifica", () => {
+    cy.log("chamei2");
+    historicoLista.acessarHistorico();
+    historicoLista.clicarEmListaNoHistorico();
+
+});
+
+
+
+Then("deve ser possivel consultar o nome e item de uma lista", () => {
+        cy.contains('h2', 'ListaNova').should('be.visible');
+        cy.contains('p', 'ItemNovo').should('be.visible');
+        
+        
+
+});
+
+

@@ -8,6 +8,7 @@ Given("acessei a tela de login", () => {
 When("informei dados validos para login", () => {
     realizaLogin.preencherEmail("lud3@gmail.com");
     realizaLogin.informaSenha("123");
+    cy.wait(500);
     realizaLogin.clicarBtnEntrar();
 });
 

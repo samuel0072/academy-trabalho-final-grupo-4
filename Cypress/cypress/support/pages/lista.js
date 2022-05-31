@@ -40,10 +40,10 @@ class lista {
     }
 
     criaVariasListas(QtdLista, qtdItensNaLista){
-        cy.wait(1000);
+        cy.wait(500);
         for (var x = 0; x < QtdLista; x++) {
             var NomeLista = "ListaNova - " + (x + 1);
-            cy.wait(1000);
+            cy.wait(500);
             this.informaNomeLista(NomeLista);
 
             for (var i = 0; i < qtdItensNaLista; i++) {
