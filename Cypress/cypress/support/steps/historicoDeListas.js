@@ -95,8 +95,6 @@ Given("dado que consultei o histórico de lista", () => {
 
 When("possuo listas de compras cadastradas", () => {
     historicoLista.acessarPaginaInicialLista();
-    
-    cy.log("chamei");
     criaLista.criaVariasListas(1,2);
     
 });
