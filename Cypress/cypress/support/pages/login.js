@@ -15,6 +15,7 @@ class login {
     }
     clicarBtnEntrar() {
         cy.contains("button", "Entrar").click();
+        cy.wait(1000);
     }
 
 

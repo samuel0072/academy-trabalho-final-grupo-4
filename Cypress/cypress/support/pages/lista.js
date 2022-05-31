@@ -34,37 +34,35 @@ class lista {
         
     }
     clicaEmConfirmar (){
-       // cy.get('.sc-jdAMXn').click({ force: true });
+       
         cy.get('.sc-jdAMXn > button').click({ force: true });
         
     }
 
     criaVariasListas(QtdLista, qtdItensNaLista){
-        
+        cy.wait(1000);
         for (var x = 0; x < QtdLista; x++) {
-            var NomeLista = "ListaNova - " + (x+1);
-            cy.wait(100);
+            var NomeLista = "ListaNova - " + (x + 1);
+            cy.wait(1000);
             this.informaNomeLista(NomeLista);
 
-                for (var i = 0; i < qtdItensNaLista; i++) {
-                   var NomeItem = "ItemNovo " + (i+1);
-                //    cy.wait(100);
-                    this.informmaNomeItem(NomeItem);
-              //      cy.wait(100);
-                    this.clicaBtnAddItem();
+            for (var i = 0; i < qtdItensNaLista; i++) {
+                var NomeItem = "ItemNovo " + (i + 1);
+                cy.wait(500);
+                this.informmaNomeItem(NomeItem);
+                cy.wait(200);
+                this.clicaBtnAddItem();
 
-                }
+            }
 
             this.clicarBtnSalvar();
-            //cy.wait(100);
             this.clicaFinalizarLista();
-            //cy.wait(100);
             this.clicaEmConfirmar();
-            //cy.wait(100);
 
 
-      
-         }
+
+
+        }
 
     }
 
