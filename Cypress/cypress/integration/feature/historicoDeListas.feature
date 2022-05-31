@@ -1,7 +1,9 @@
 Feature: historico de lista de compras
+    Como um usuário com conta no sistema
+    Desejo consultar minhas últimas listas de compra
+    Para visualizar minhas últimas compras
 
     
-
 Scenario: O usuário só deve visualizar as suas próprias listas
     Given acessei a tela de historico de compras
     When crio uma lista qualquer

@@ -15,6 +15,6 @@ When("informei dados validos para login", () => {
 Then("visualizo a tela inicial do sistema", () => {
 
     cy.url()
-    .should('be.equal', 'https://academy-lembra-compras.herokuapp.com/lista')
+        .should('be.equal', 'https://academy-lembra-compras.herokuapp.com/lista')
 
 });
